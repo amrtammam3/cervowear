@@ -1,0 +1,112 @@
+/* CERVOWEAR storefront — structural/responsive rules that can't be expressed
+   as inline styles (media queries, animations, pseudo-elements). Ported
+   from the CervoWear.dc.html design prototype. Component visuals (colors,
+   spacing, type) come from design-system.css; this file is layout only. */
+
+body { margin: 0; }
+
+/* Checkout: the summary is first in the DOM (so mobile shows it before the
+   Place Order button) but sits in the right-hand column on desktop, via
+   `order` rather than DOM position. */
+.cw-checkout-summary { order: 2; }
+.cw-checkout-form { order: 1; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--color-divider); }
+a { color: var(--color-accent-700); text-decoration: none; }
+a:hover { color: var(--color-accent-800); }
+
+.btn-icon { min-width: 44px; min-height: 44px; }
+
+.cw-store-navlinks { display: flex; }
+.cw-store-hamburger { display: none; }
+.cw-mobile-searchbar { display: none; }
+
+.cw-mega-panel {
+  position: absolute; left: 0; right: 0; top: 100%;
+  background: var(--color-bg); border-bottom: 1px solid var(--color-divider);
+  box-shadow: var(--shadow-md); z-index: 60; animation: cw-mega-in 0.16s ease;
+}
+.cw-search-panel {
+  background: var(--color-bg); border-bottom: 1px solid var(--color-divider);
+  box-shadow: var(--shadow-md); z-index: 70; animation: cw-mega-in 0.16s ease;
+  max-height: 80vh; overflow-y: auto;
+}
+@keyframes cw-mega-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+.cw-nav-link {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-ui); font-weight: 600; font-size: 13px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text);
+  padding: 8px 2px;
+}
+.cw-nav-link:hover { color: var(--color-accent-700); }
+
+/* Lookbook — hovering a drop row darkens it and gently zooms its images,
+   the same "come alive on hover" feel as the Denim Tears lookbook index.
+   Gated to real hover-capable pointers only — on touch, :hover sticks after
+   a tap (no mouseleave ever fires), which read as the row getting stuck dark. */
+@media (hover: hover) {
+  .cw-lookbook-row:hover { background: var(--color-accent-900); }
+  .cw-lookbook-row:hover .cw-lookbook-row-title,
+  .cw-lookbook-row:hover .cw-lookbook-row-meta { color: var(--color-bg); opacity: 0.85; }
+  .cw-lookbook-row:hover .cw-lookbook-thumb { transform: scale(1.04); }
+  .cw-lookbook-thumb:hover { transform: scale(1.08) !important; }
+}
+.cw-lookbook-row { transition: background-color 0.25s ease, color 0.25s ease; }
+.cw-lookbook-thumb { transition: transform 0.35s ease; }
+
+.cw-lookbook-strip { scrollbar-width: none; }
+.cw-lookbook-strip::-webkit-scrollbar { display: none; }
+.cw-lookbook-row-mobile { display: none; }
+
+@media (max-width: 480px) {
+  .cw-store-navbar-inner { padding-left: 16px !important; padding-right: 16px !important; gap: 10px !important; }
+  .cw-store-logo { font-size: 17px !important; }
+  .cw-store-icons { gap: 2px !important; }
+}
+
+@media (max-width: 900px) {
+  .cw-store-navlinks { display: none; }
+  .cw-store-hamburger { display: flex; }
+  .cw-mobile-searchbar { display: flex; }
+  .cw-mega-panel { display: none !important; }
+  /* Admin is an internal shortcut, not a customer action — it lives in the
+     hamburger menu on mobile so the top icon row stays to the standard
+     three (Search / Wishlist / Bag) instead of crowding out the tap targets. */
+  .cw-store-admin-icon { display: none !important; }
+  .cw-hero { height: 60vh !important; min-height: 380px !important; }
+  .cw-store-wordmark { font-size: 9vw !important; }
+  .cw-store-feat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .cw-store-feat-text-tile { grid-column: span 2; }
+  .cw-home-feat-grid > *:nth-child(8) { display: none !important; }
+  .cw-store-category-grid { grid-template-columns: 1fr !important; }
+  .cw-store-category-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .cw-product-form-grid { grid-template-columns: 1fr !important; }
+  .cw-promo-grid { grid-template-columns: 1fr !important; }
+  .cw-exit-popup { grid-template-columns: 1fr !important; }
+  .cw-exit-popup-image { display: none !important; }
+  .cw-store-footer-grid { grid-template-columns: 1fr 1fr !important; }
+  .cw-store-footer-newsletter { grid-column: 1 / -1 !important; margin-bottom: 8px; }
+  .cw-contact-grid { grid-template-columns: 1fr !important; }
+  .cw-footer-watermark { display: none; }
+  .cw-returns-steps { grid-template-columns: 1fr !important; }
+  .cw-lookbook-row-inner { grid-template-columns: 1fr !important; gap: 10px !important; padding: 16px 20px !important; }
+  .cw-lookbook-strip { display: none !important; }
+  .cw-lookbook-row-mobile { display: block !important; }
+  .cw-lookbook-detail-grid { grid-template-columns: 1fr !important; }
+  .cw-lookbook-detail-thumbs { display: none !important; }
+  .cw-lookbook-detail-main { order: 1 !important; }
+  .cw-lookbook-detail-meta { order: 2 !important; }
+  .cw-lookbook-detail-photo { height: 420px !important; }
+  .cw-lookbook-gallery-grid > div { height: 220px !important; }
+  .cw-checkout-grid { grid-template-columns: 1fr !important; }
+  .cw-checkout-summary { display: none !important; }
+  .cw-checkout-mobile-summary { display: block !important; }
+  .cw-checkout-mobile-cta { display: block !important; }
+  .cw-checkout-submit-desktop { display: none !important; }
+  .cw-pdp-grid { grid-template-columns: 1fr !important; }
+  .cw-pdp-main { order: 1; height: 420px !important; }
+  .cw-pdp-thumbs { order: 2; flex-direction: row !important; overflow-x: auto; gap: 8px !important; -webkit-overflow-scrolling: touch; }
+  .cw-pdp-thumbs .blueprint { width: 64px !important; height: 80px !important; }
+  .cw-pdp-plate { order: 3; }
+}

@@ -1,9 +1,11 @@
-@import 'tailwindcss';
+@import './design-system.css';
+@import './storefront.css';
+@import './admin.css';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-}
+/* Tailwind's preflight (@tailwind base) is intentionally omitted: it would
+   load after these @import rules (CSS requires @import first) and its
+   resets would beat design-system.css's own heading/link rules in the
+   cascade. design-system.css already carries a full reset, so this is
+   only components + utilities for the Breeze scaffold pages. */
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,41 @@
+/* CERVOWEAR admin — responsive rules for the AdminLayout sidebar/topbar and
+   the dashboard's KPI/chart grids. Ported from the CervoWear.dc.html admin
+   prototype; component visuals come from design-system.css as elsewhere. */
+
+.cw-admin-kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cw-admin-chart-row { grid-template-columns: 1.6fr 1fr; }
+
+@media (max-width: 1279px) {
+  .cw-admin-sidebar { width: 64px !important; }
+  .cw-admin-sidebar > div:first-child, .cw-admin-sidebar > div:last-child { display: none; }
+  .cw-admin-sidebar .cw-admin-nav-section { display: none; }
+  .cw-admin-sidebar a > span.cw-admin-nav-label { display: none; }
+  .cw-admin-sidebar a { justify-content: center; }
+  .cw-admin-search { width: 170px !important; }
+  .cw-admin-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1023px) {
+  .cw-admin-chart-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 767px) {
+  .cw-admin-sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 240px !important; z-index: 100;
+    transform: translateX(-100%); background: var(--color-bg); box-shadow: var(--shadow-lg);
+    transition: transform 0.2s ease;
+  }
+  .cw-admin-sidebar.open { transform: translateX(0); }
+  .cw-admin-sidebar > div:first-child, .cw-admin-sidebar > div:last-child { display: block !important; }
+  .cw-admin-sidebar .cw-admin-nav-section { display: block !important; }
+  .cw-admin-sidebar a > span.cw-admin-nav-label { display: inline !important; }
+  .cw-admin-sidebar a { justify-content: flex-start !important; min-height: 44px; }
+  .cw-admin-hamburger { display: flex !important; }
+  .cw-admin-search { display: none !important; }
+  .cw-admin-kpi-grid { grid-template-columns: 1fr; }
+  .cw-admin-main .card:has(table.table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cw-admin-main table.table { min-width: 600px; }
+  .cw-admin-main { padding: 16px !important; }
+  .cw-inbox-grid { grid-template-columns: 1fr !important; height: auto !important; border: none !important; }
+  .cw-inbox-grid > div { border: 1px solid var(--color-divider); margin-bottom: 12px; }
+}
